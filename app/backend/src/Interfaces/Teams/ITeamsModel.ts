@@ -1,7 +1,7 @@
-import { ITeams } from './ITeams';
+import { Teams } from '../../types/Teams';
 
 export interface ITeamsModel {
-  // create(data: Partial<ITeams>): Promise<ITeams>,
-  findAll(): Promise<ITeams[]>,
-  findById(id: ITeams['id']): Promise<ITeams | null>
+  // create(data: Partial<Teams>): Promise<Teams>,
+  findAll(): Promise<Teams[]>,
+  findById(id: Teams['id']): Promise<Teams | null>
 }

@@ -7,7 +7,7 @@ import { app } from '../app';
 import Example from '../database/models/ExampleModel';
 
 import { Response } from 'superagent';
-import { teams, team } from './teams.mock';
+import { teams, team } from '../tests/mocks/teams.mock';
 import Teams from '../database/models/SequelizeTeams';
 
 chai.use(chaiHttp);
