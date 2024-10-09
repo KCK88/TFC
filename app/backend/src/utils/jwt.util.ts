@@ -5,7 +5,7 @@ export type PayloadObject = {
   password: string,
 };
 
-const JWT_SECRET: string = process.env.JWT_SECRET || 'segredo';
+const JWT_SECRET: string = process.env.JWT_SECRET || 'jwt_secret';
 
 export const create = (payload: PayloadObject): string => {
   const token = sign(payload, JWT_SECRET);

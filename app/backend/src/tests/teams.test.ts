@@ -15,6 +15,9 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Teste da tota de teams', () => {
+  beforeEach(() => {
+    sinon.restore();
+  });
   it('should return all teams', async function() {
     sinon.stub(Teams, 'findAll').resolves(teams as any);
 
