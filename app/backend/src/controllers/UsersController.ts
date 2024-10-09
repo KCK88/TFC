@@ -24,8 +24,8 @@ export default class UsersController {
     }
     const token = authorization.split(' ')[1];
 
-    const { email, password } = verifyToken(token);
-    const user = await this.userService.findUserByEmail(email, password);
+    const { email } = verifyToken(token);
+    const user = await this.userService.findUserByEmail(email);
 
     return user === null ? res.status(404).send() : res.status(200).json({ role: user.role });
   }
