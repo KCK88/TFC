@@ -8,7 +8,7 @@ export default class TeamsService {
     private teamsModel: ITeamsModel = new TeamsModel(),
   ) { }
 
-  public async getAllTemas(): Promise<Teams[]> {
+  public async getAllTeams(): Promise<Teams[]> {
     const allTeams = await this.teamsModel.findAll();
     return allTeams;
   }
