@@ -14,21 +14,41 @@ const include = [{ model: Teams,
 ];
 
 export default class MatchesModel implements IMatchesModel {
-  async findAllMatches(): Promise<Matches[]> {
+  async updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number): Promise<void> {
+    await this.model.update(
+      { homeTeamGoals, awayTeamGoals },
+      {
+        where: {
+          id,
+        },
+      },
+    );
+  }
+
+  public async endMatch(id: number): Promise<Matches> {
+    const update = await this.model.update(
+      { inProgress: false },
+      {
+        where: {
+          id,
+        },
+      },
+    );
+    return update as unknown as Matches;
+  }
+
+  public async findAllMatches(): Promise<Matches[]> {
     const dbData = await this.model.findAll({
       include,
     });
-    console.log(dbData.length);
-
     return dbData;
   }
 
-  async findAllMatchesInProgres(inProgress: boolean): Promise<Matches[]> {
+  public async findAllMatchesInProgres(inProgress: boolean): Promise<Matches[]> {
     const dbData = await this.model.findAll({
       include,
       where: { inProgress },
     });
-    console.log(dbData.length);
     return dbData;
   }
 

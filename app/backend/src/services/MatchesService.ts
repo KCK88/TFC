@@ -18,4 +18,13 @@ export default class MatchesService {
     const matchesInProgres = await this.matchesModel.findAllMatchesInProgres(inProgressToBool);
     return matchesInProgres;
   }
+
+  public async endMatch(id: number) {
+    const update = await this.matchesModel.endMatch(id);
+    return update;
+  }
+
+  async matchUpdate(id: number, homeTeamGoals: number, awayTeamGoals: number): Promise<void> {
+    await this.matchesModel.updateMatch(id, homeTeamGoals, awayTeamGoals);
+  }
 }
