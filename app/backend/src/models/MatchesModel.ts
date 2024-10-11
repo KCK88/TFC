@@ -3,6 +3,7 @@ import { Matches } from '../types/Matches';
 import SequelizeMatches from '../database/models/SequelizeMatches';
 import { IMatchesModel } from '../Interfaces/Matches/IMatchesModel';
 import Teams from '../database/models/SequelizeTeams';
+import { NewEntity } from '../Interfaces';
 
 const include = [{ model: Teams,
   as: 'homeTeam',
@@ -14,6 +15,15 @@ const include = [{ model: Teams,
 ];
 
 export default class MatchesModel implements IMatchesModel {
+  async createMatch(match: NewEntity<Matches>): Promise<Matches> {
+    const toUpdate = {
+      ...match,
+      inProgress: true,
+    };
+    const newMatch = await this.model.create(toUpdate);
+    return newMatch;
+  }
+
   async updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number): Promise<void> {
     await this.model.update(
       { homeTeamGoals, awayTeamGoals },
