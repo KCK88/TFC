@@ -2,6 +2,7 @@ import TeamsModel from '../models/TeamsModel';
 import { ITeamsModel } from '../Interfaces/Teams/ITeamsModel';
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
 import { Teams } from '../types/Teams';
+import { Leaderboard } from '../types/Leaderboard';
 
 export default class TeamsService {
   constructor(
@@ -19,22 +20,23 @@ export default class TeamsService {
     return { status: 'SUCCESSFUL', data: team };
   }
 
-  async homeLeaderboard() {
+  async homeLeaderboard(): Promise<Leaderboard[]> {
     const teams = await this.teamsModel.homeLeaderboard();
-    const Leaderboard = teams.map((team) => (
-      {
-        name: team.teamName,
-        totalPoints: team.team?.filter((points) => points.homeTeamGoals > points.awayTeamGoals),
-        totalGames: team.team?.length,
-        totalVictories: team.team?.filter((p) => p.homeTeamGoals > p.awayTeamGoals).length,
-        totalDraws: team.team?.filter((p) => p.homeTeamGoals === p.awayTeamGoals).length,
-        totalLosses: team.team?.filter((p) => p.homeTeamGoals < p.awayTeamGoals).length,
-        goalsFavor: team.team?.forEach((goals) => goals.homeTeamGoals),
-        goalsOwn: team.team?.forEach((goals) => goals.awayTeamGoals),
-      }
-    ));
-    console.log(Leaderboard);
+    const leaderboards: Leaderboard[] = [];
 
-    return Leaderboard;
+    teams.forEach((matches) => {
+      const leaderboard: Leaderboard = {
+        goalsFavor: matches.reduce((acc, curr) => acc + (curr.homeTeamGoals ?? 0), 0),
+        goalsOwn: 0,
+        name: matches[0].teamName,
+        totalDraws: 0,
+        totalGames: 0,
+        totalLosses: 0,
+        totalPoints: 0,
+        totalVictories: 0,
+      };
+      leaderboards.push(leaderboard);
+    });
+    return leaderboards;
   }
 }

@@ -1,7 +1,7 @@
-import { Team } from './Team';
+import { Matches } from './Matches';
 
 export type Teams = {
   id: number;
   teamName: string
-  team?: Team[]
+  matches?: Matches[]
 };
