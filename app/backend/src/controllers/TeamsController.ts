@@ -24,8 +24,13 @@ export default class TeamsController {
     res.status(200).json(serviceResponse.data);
   }
 
-  async leaderboard(_req: Request, res: Response) {
-    const dbData = await this.teamsService.homeLeaderboard(); // as dto
+  async homeLeaderboard(_req: Request, res: Response) {
+    const dbData = await this.teamsService.homeLeaderboard();
+    return res.status(200).json(dbData);
+  }
+
+  async awayLeaderboard(_req: Request, res: Response) {
+    const dbData = await this.teamsService.awayLeaderboard();
     return res.status(200).json(dbData);
   }
 }

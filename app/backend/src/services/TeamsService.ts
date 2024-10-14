@@ -21,7 +21,7 @@ export default class TeamsService {
   }
 
   async homeLeaderboard(): Promise<Leaderboard[]> {
-    const teams = await this.teamsModel.homeLeaderboard();
+    const teams = await this.teamsModel.homeLeaderboard('homeTeam');
     const leaderboards: Leaderboard[] = [];
 
     teams.forEach((team) => {
@@ -34,6 +34,28 @@ export default class TeamsService {
         totalVictories: victories,
         totalDraws: draws,
         totalLosses: team.filter((match) => match.awayTeamGoals > match.homeTeamGoals).length,
+        goalsOwn: team.reduce((acc, curr) => acc + (curr.awayTeamGoals), 0),
+        goalsFavor: team.reduce((acc, curr) => acc + (curr.homeTeamGoals), 0),
+      };
+      leaderboards.push(leaderboard);
+    });
+    return leaderboards;
+  }
+
+  async awayLeaderboard(): Promise<Leaderboard[]> {
+    const teams = await this.teamsModel.homeLeaderboard('awayTeam');
+    const leaderboards: Leaderboard[] = [];
+
+    teams.forEach((team) => {
+      const victories = team.filter((match) => match.awayTeamGoals > match.homeTeamGoals).length;
+      const draws = team.filter((match) => match.awayTeamGoals === match.homeTeamGoals).length;
+      const leaderboard: Leaderboard = {
+        name: team[0].teamName,
+        totalPoints: victories * 3 + draws,
+        totalGames: team.length,
+        totalVictories: victories,
+        totalDraws: draws,
+        totalLosses: team.filter((match) => match.awayTeamGoals < match.homeTeamGoals).length,
         goalsOwn: team.reduce((acc, curr) => acc + (curr.awayTeamGoals), 0),
         goalsFavor: team.reduce((acc, curr) => acc + (curr.homeTeamGoals), 0),
       };

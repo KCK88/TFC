@@ -6,18 +6,18 @@ import { TeamMatches } from '../types/TeamMatches';
 // import { TeamMatches } from '../types/TeamMatches';
 
 export default class TeamsModel implements ITeamsModel {
-  async homeLeaderboard(): Promise<Map<number, TeamMatches[]>> {
+  async homeLeaderboard(teamType: string): Promise<Map<number, TeamMatches[]>> {
     const dict = new Map<number, TeamMatches[]>();
     const dbData = await this.model
-      .findAll({ raw: true, include: [{ model: Matches, as: 'homeTeam' }] });
+      .findAll({ raw: true, include: [{ model: Matches, as: teamType }] });
     const dbMap = dbData.map((item: any) => ({
       id: item.id,
       teamName: item.teamName,
-      homeTeamId: item['homeTeam.homeTeamId'],
-      homeTeamGoals: item['homeTeam.homeTeamGoals'],
-      awayTeamId: item['homeTeam.awayTeamId'],
-      awayTeamGoals: item['homeTeam.awayTeamGoals'],
-      inProgress: item['homeTeam.inProgress'],
+      homeTeamId: item[`${teamType}.homeTeamId`],
+      homeTeamGoals: item[`${teamType}.homeTeamGoals`],
+      awayTeamId: item[`${teamType}.awayTeamId`],
+      awayTeamGoals: item[`${teamType}.awayTeamGoals`],
+      inProgress: item[`${teamType}.inProgress`],
     } as TeamMatches));
     dbMap.forEach((il) => {
       const value = dict.get(il.id) ?? [];
