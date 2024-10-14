@@ -8,7 +8,8 @@ import { TeamMatches } from '../types/TeamMatches';
 export default class TeamsModel implements ITeamsModel {
   async homeLeaderboard(): Promise<Map<number, TeamMatches[]>> {
     const dict = new Map<number, TeamMatches[]>();
-    const dbData = await this.model.findAll({ include: [{ model: Matches, as: 'homeTeam' }] });
+    const dbData = await this.model
+      .findAll({ raw: true, include: [{ model: Matches, as: 'homeTeam' }] });
     const dbMap = dbData.map((item: any) => ({
       id: item.id,
       teamName: item.teamName,
@@ -23,7 +24,6 @@ export default class TeamsModel implements ITeamsModel {
       value.push(il);
       dict.set(il.id, value);
     });
-    console.log(dict);
 
     return dict;
   }

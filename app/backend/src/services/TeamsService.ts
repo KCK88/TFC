@@ -24,16 +24,18 @@ export default class TeamsService {
     const teams = await this.teamsModel.homeLeaderboard();
     const leaderboards: Leaderboard[] = [];
 
-    teams.forEach((matches) => {
+    teams.forEach((team) => {
+      const victories = team.filter((match) => match.awayTeamGoals < match.homeTeamGoals).length;
+      const draws = team.filter((match) => match.awayTeamGoals === match.homeTeamGoals).length;
       const leaderboard: Leaderboard = {
-        goalsFavor: matches.reduce((acc, curr) => acc + (curr.homeTeamGoals ?? 0), 0),
-        goalsOwn: 0,
-        name: matches[0].teamName,
-        totalDraws: 0,
-        totalGames: 0,
-        totalLosses: 0,
-        totalPoints: 0,
-        totalVictories: 0,
+        name: team[0].teamName,
+        totalPoints: victories * 3 + draws,
+        totalGames: team.length,
+        totalVictories: victories,
+        totalDraws: draws,
+        totalLosses: team.filter((match) => match.awayTeamGoals > match.homeTeamGoals).length,
+        goalsOwn: team.reduce((acc, curr) => acc + (curr.awayTeamGoals), 0),
+        goalsFavor: team.reduce((acc, curr) => acc + (curr.homeTeamGoals), 0),
       };
       leaderboards.push(leaderboard);
     });
