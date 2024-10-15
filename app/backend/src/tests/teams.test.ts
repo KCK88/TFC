@@ -34,4 +34,14 @@ describe('Teste da tota de teams', () => {
     expect(status).to.equal(200);
     expect(body).to.deep.equal(team);
   });
+
+
+  it('should return all home leaderboard', async function() {
+    sinon.stub(Teams, 'findAll').resolves(teams as any);
+
+    const { status, body } = await chai.request(app).get('/leaderboard/home');
+
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal(teams);
+  });
 });

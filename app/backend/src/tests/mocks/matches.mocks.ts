@@ -1350,3 +1350,33 @@ export const matchesEnded = [
     }
   }
 ]
+
+export const createdMatch = {
+  "id": 49,
+  "homeTeamId": 10,
+  "homeTeamGoals": 2,
+  "awayTeamId": 16,
+  "awayTeamGoals": 2,
+  "inProgress": true
+}
+
+export const createBody = {
+  "homeTeamId": 1,
+  "awayTeamId": 2,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 1
+}
+
+export const equalTeams = {
+  "homeTeamId": 1,
+  "awayTeamId": 1,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 1
+}
+
+export const notFoundTeam = {
+  "homeTeamId": 120,
+  "awayTeamId": 18,
+  "homeTeamGoals": 2,
+  "awayTeamGoals": 1
+}

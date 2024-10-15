@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import UsersService from '../services/UsersService';
 import mapStatusHTTP from '../utils/mapStatusHTTP';
-import { verifyToken } from '../utils/jwt.util';
+import jwtUtil from '../utils/jwt.util';
 
 export default class UsersController {
   constructor(private userService = new UsersService()) {}
@@ -24,7 +24,7 @@ export default class UsersController {
     }
     const token = authorization.split(' ')[1];
 
-    const { email } = verifyToken(token);
+    const { email } = jwtUtil.verifyToken(token);
     const user = await this.userService.findUserByEmail(email);
 
     return user === null ? res.status(404).send() : res.status(200).json({ role: user.role });
