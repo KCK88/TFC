@@ -25,7 +25,7 @@ export default class TeamsController {
   }
 
   async homeLeaderboard(_req: Request, res: Response) {
-    const dbData = await this.teamsService.homeLeaderboard();
+    const dbData = await this.teamsService.homeBalanceEfficiency();
     return res.status(200).json(dbData);
   }
 

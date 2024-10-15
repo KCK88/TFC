@@ -3,6 +3,7 @@ import { ITeamsModel } from '../Interfaces/Teams/ITeamsModel';
 import { ServiceResponse } from '../Interfaces/ServiceResponse';
 import { Teams } from '../types/Teams';
 import { Leaderboard } from '../types/Leaderboard';
+import { BalanceEfficiency } from '../types/BalanceEfficiency';
 
 export default class TeamsService {
   constructor(
@@ -34,11 +35,31 @@ export default class TeamsService {
         totalVictories: victories,
         totalDraws: draws,
         totalLosses: team.filter((match) => match.awayTeamGoals > match.homeTeamGoals).length,
-        goalsOwn: team.reduce((acc, curr) => acc + (curr.awayTeamGoals), 0),
         goalsFavor: team.reduce((acc, curr) => acc + (curr.homeTeamGoals), 0),
+        goalsOwn: team.reduce((acc, curr) => acc + (curr.awayTeamGoals), 0),
       };
       leaderboards.push(leaderboard);
     });
+    return leaderboards;
+  }
+
+  async homeBalanceEfficiency() {
+    const leaderboards: BalanceEfficiency[] = [];
+    const teamsMacthes = await this.homeLeaderboard();
+
+    teamsMacthes.forEach((team) => {
+      const balances = team.goalsFavor - team.goalsOwn;
+      const efficiencies = (team.totalPoints / (team.totalGames * 3)) * 100;
+      const leaderboard: BalanceEfficiency = {
+        ...team,
+        goalsBalance: balances,
+        efficiency: `${efficiencies.toFixed(2)}%`,
+      };
+      console.log(leaderboard);
+
+      leaderboards.push(leaderboard);
+    });
+
     return leaderboards;
   }
 

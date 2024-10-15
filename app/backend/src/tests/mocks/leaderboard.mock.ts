@@ -1,13 +1,78 @@
-export const homeLeaderboard = [
+export const teamsMatches = [
+{
+    id: 1,
+    teamName: 'Avaí/Kindermann',
+    'homeTeam.id': 9,
+    'homeTeam.homeTeamId': 1,
+    'homeTeam.homeTeamGoals': 0,
+    'homeTeam.awayTeamId': 12,
+    'homeTeam.awayTeamGoals': 3,
+    'homeTeam.inProgress': 0
+  },
+  {
+    id: 1,
+    teamName: 'Avaí/Kindermann',
+    'homeTeam.id': 17,
+    'homeTeam.homeTeamId': 1,
+    'homeTeam.homeTeamGoals': 2,
+    'homeTeam.awayTeamId': 8,
+    'homeTeam.awayTeamGoals': 3,
+    'homeTeam.inProgress': 0
+  },
+  {
+    id: 1,
+    teamName: 'Avaí/Kindermann',
+    'homeTeam.id': 33,
+    'homeTeam.homeTeamId': 1,
+    'homeTeam.homeTeamGoals': 1,
+    'homeTeam.awayTeamId': 16,
+    'homeTeam.awayTeamGoals': 1,
+    'homeTeam.inProgress': 0
+  },
+  {
+    id: 2,
+    teamName: 'Bahia',
+    'homeTeam.id': 10,
+    'homeTeam.homeTeamId': 2,
+    'homeTeam.homeTeamGoals': 0,
+    'homeTeam.awayTeamId': 9,
+    'homeTeam.awayTeamGoals': 2,
+    'homeTeam.inProgress': 0
+  },
+  {
+    id: 2,
+    teamName: 'Bahia',
+    'homeTeam.id': 25,
+    'homeTeam.homeTeamId': 2,
+    'homeTeam.homeTeamGoals': 0,
+    'homeTeam.awayTeamId': 6,
+    'homeTeam.awayTeamGoals': 1,
+    'homeTeam.inProgress': 0
+  },
+  {
+    id: 2,
+    teamName: 'Bahia',
+    'homeTeam.id': 36,
+    'homeTeam.homeTeamId': 2,
+    'homeTeam.homeTeamGoals': 0,
+    'homeTeam.awayTeamId': 7,
+    'homeTeam.awayTeamGoals': 1,
+    'homeTeam.inProgress': 0
+  },
+]
+
+export const teamsMatchesResult = [
   {
     "name": "Avaí/Kindermann",
-    "totalPoints": 13,
-    "totalGames": 7,
-    "totalVictories": 4,
+    "totalPoints": 1,
+    "totalGames": 3,
+    "totalVictories": 0,
     "totalDraws": 1,
     "totalLosses": 2,
-    "goalsOwn": 11,
-    "goalsFavor": 11
+    "goalsFavor": 3,
+    "goalsOwn": 7,
+    "goalsBalance": -4,
+    "efficiency": "11.11%"
   },
   {
     "name": "Bahia",
@@ -16,147 +81,9 @@ export const homeLeaderboard = [
     "totalVictories": 0,
     "totalDraws": 0,
     "totalLosses": 3,
+    "goalsFavor": 0,
     "goalsOwn": 4,
-    "goalsFavor": 0
+    "goalsBalance": -4,
+    "efficiency": "0.00%"
   },
-  {
-    "name": "Botafogo",
-    "totalPoints": 4,
-    "totalGames": 3,
-    "totalVictories": 1,
-    "totalDraws": 1,
-    "totalLosses": 1,
-    "goalsOwn": 4,
-    "goalsFavor": 2
-  },
-  {
-    "name": "Corinthians",
-    "totalPoints": 7,
-    "totalGames": 3,
-    "totalVictories": 2,
-    "totalDraws": 1,
-    "totalLosses": 0,
-    "goalsOwn": 2,
-    "goalsFavor": 7
-  },
-  {
-    "name": "Cruzeiro",
-    "totalPoints": 2,
-    "totalGames": 3,
-    "totalVictories": 0,
-    "totalDraws": 2,
-    "totalLosses": 1,
-    "goalsOwn": 4,
-    "goalsFavor": 3
-  },
-  {
-    "name": "Ferroviária",
-    "totalPoints": 6,
-    "totalGames": 3,
-    "totalVictories": 2,
-    "totalDraws": 0,
-    "totalLosses": 1,
-    "goalsOwn": 2,
-    "goalsFavor": 4
-  },
-  {
-    "name": "Flamengo",
-    "totalPoints": 2,
-    "totalGames": 3,
-    "totalVictories": 0,
-    "totalDraws": 2,
-    "totalLosses": 1,
-    "goalsOwn": 4,
-    "goalsFavor": 3
-  },
-  {
-    "name": "Grêmio",
-    "totalPoints": 6,
-    "totalGames": 3,
-    "totalVictories": 2,
-    "totalDraws": 0,
-    "totalLosses": 1,
-    "goalsOwn": 3,
-    "goalsFavor": 5
-  },
-  {
-    "name": "Internacional",
-    "totalPoints": 4,
-    "totalGames": 3,
-    "totalVictories": 1,
-    "totalDraws": 1,
-    "totalLosses": 1,
-    "goalsOwn": 6,
-    "goalsFavor": 4
-  },
-  {
-    "name": "Minas Brasília",
-    "totalPoints": 2,
-    "totalGames": 4,
-    "totalVictories": 0,
-    "totalDraws": 2,
-    "totalLosses": 2,
-    "goalsOwn": 8,
-    "goalsFavor": 5
-  },
-  {
-    "name": "Napoli-SC",
-    "totalPoints": 3,
-    "totalGames": 3,
-    "totalVictories": 0,
-    "totalDraws": 3,
-    "totalLosses": 0,
-    "goalsOwn": 2,
-    "goalsFavor": 2
-  },
-  {
-    "name": "Palmeiras",
-    "totalPoints": 7,
-    "totalGames": 3,
-    "totalVictories": 2,
-    "totalDraws": 1,
-    "totalLosses": 0,
-    "goalsOwn": 5,
-    "goalsFavor": 10
-  },
-  {
-    "name": "Real Brasília",
-    "totalPoints": 7,
-    "totalGames": 3,
-    "totalVictories": 2,
-    "totalDraws": 1,
-    "totalLosses": 0,
-    "goalsOwn": 1,
-    "goalsFavor": 3
-  },
-  {
-    "name": "Santos",
-    "totalPoints": 9,
-    "totalGames": 3,
-    "totalVictories": 3,
-    "totalDraws": 0,
-    "totalLosses": 0,
-    "goalsOwn": 3,
-    "goalsFavor": 9
-  },
-  {
-    "name": "São José-SP",
-    "totalPoints": 0,
-    "totalGames": 3,
-    "totalVictories": 0,
-    "totalDraws": 0,
-    "totalLosses": 3,
-    "goalsOwn": 5,
-    "goalsFavor": 2
-  },
-  {
-    "name": "São Paulo",
-    "totalPoints": 7,
-    "totalGames": 3,
-    "totalVictories": 2,
-    "totalDraws": 1,
-    "totalLosses": 0,
-    "goalsOwn": 1,
-    "goalsFavor": 6
-  }
 ]

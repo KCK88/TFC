@@ -7,7 +7,7 @@ import { app } from '../app';
 
 
 import Teams from '../database/models/SequelizeTeams';
-import { homeLeaderboard } from './mocks/leaderboard.mock';
+import { teamsMatches, teamsMatchesResult } from './mocks/leaderboard.mock';
 
 chai.use(chaiHttp);
 
@@ -19,12 +19,12 @@ describe('Teste da rota leaderbords', () => {
   });
 
   it('should return all home leaderboard', async function() {
-    sinon.stub(Teams, 'findAll').returns(homeLeaderboard as any);
+    sinon.stub(Teams, 'findAll').resolves(JSON.parse(JSON.stringify(teamsMatches)) as any);
 
     const { status, body } = await chai.request(app).get('/leaderboard/home');
-console.log(status, body);
+
 
     expect(status).to.equal(200);
-    expect(body).to.deep.equal(homeLeaderboard);
+    expect(body).to.deep.equal(JSON.parse(JSON.stringify(teamsMatchesResult)) as any);
   });
 });
