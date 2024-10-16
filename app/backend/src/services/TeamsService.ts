@@ -93,11 +93,47 @@ export default class TeamsService {
         totalVictories: victories,
         totalDraws: draws,
         totalLosses: team.filter((match) => match.awayTeamGoals < match.homeTeamGoals).length,
-        goalsOwn: team.reduce((acc, curr) => acc + (curr.awayTeamGoals), 0),
-        goalsFavor: team.reduce((acc, curr) => acc + (curr.homeTeamGoals), 0),
+        goalsOwn: team.reduce((acc, curr) => acc + (curr.homeTeamGoals), 0),
+        goalsFavor: team.reduce((acc, curr) => acc + (curr.awayTeamGoals), 0),
       };
       leaderboards.push(leaderboard);
     });
     return leaderboards;
+  }
+
+  async awayBalanceEfficiency() {
+    const leaderboards: BalanceEfficiency[] = [];
+    const teamsMacthes = await this.awayLeaderboard();
+
+    teamsMacthes.forEach((team) => {
+      const balance = team.goalsFavor - team.goalsOwn;
+      const efficiencies = (team.totalPoints / (team.totalGames * 3)) * 100;
+      const leaderboard: BalanceEfficiency = {
+        ...team,
+        goalsBalance: balance,
+        efficiency: `${efficiencies.toFixed(2)}`,
+      };
+      leaderboards.push(leaderboard);
+    });
+
+    return leaderboards;
+  }
+
+  async awayOrdered() {
+    const leaderboard = await this.awayBalanceEfficiency();
+
+    leaderboard.sort((x, y) => {
+      if (y.totalPoints !== x.totalPoints) {
+        return y.totalPoints - x.totalPoints;
+      }
+      if (y.totalVictories !== x.totalVictories) {
+        return y.totalVictories - x.totalVictories;
+      }
+      if (y.goalsBalance !== x.goalsBalance) {
+        return y.goalsBalance - x.goalsBalance;
+      }
+      return y.goalsFavor - x.goalsFavor;
+    });
+    return leaderboard;
   }
 }

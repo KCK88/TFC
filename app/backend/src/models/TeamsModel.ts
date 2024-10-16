@@ -5,11 +5,13 @@ import Matches from '../database/models/SequelizeMatches';
 import { TeamMatches } from '../types/TeamMatches';
 // import { TeamMatches } from '../types/TeamMatches';
 
+const where = { inProgress: false };
+
 export default class TeamsModel implements ITeamsModel {
   async homeLeaderboard(teamType: string): Promise<Map<number, TeamMatches[]>> {
     const dict = new Map<number, TeamMatches[]>();
     const dbData = await this.model
-      .findAll({ raw: true, include: [{ model: Matches, as: teamType }] });
+      .findAll({ raw: true, include: [{ model: Matches, as: teamType, where }] });
     const dbMap = dbData.map((item: any) => ({
       id: item.id,
       teamName: item.teamName,

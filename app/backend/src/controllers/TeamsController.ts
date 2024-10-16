@@ -30,7 +30,7 @@ export default class TeamsController {
   }
 
   async awayLeaderboard(_req: Request, res: Response) {
-    const dbData = await this.teamsService.awayLeaderboard();
+    const dbData = await this.teamsService.awayOrdered();
     return res.status(200).json(dbData);
   }
 }
