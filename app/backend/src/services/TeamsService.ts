@@ -53,14 +53,30 @@ export default class TeamsService {
       const leaderboard: BalanceEfficiency = {
         ...team,
         goalsBalance: balances,
-        efficiency: `${efficiencies.toFixed(2)}%`,
+        efficiency: `${efficiencies.toFixed(2)}`,
       };
-      console.log(leaderboard);
-
       leaderboards.push(leaderboard);
     });
 
     return leaderboards;
+  }
+
+  async homeOrdered() {
+    const leaderboard = await this.homeBalanceEfficiency();
+
+    leaderboard.sort((a, b) => {
+      if (b.totalPoints !== a.totalPoints) {
+        return b.totalPoints - a.totalPoints;
+      }
+      if (b.totalVictories !== a.totalVictories) {
+        return b.totalVictories - a.totalVictories;
+      }
+      if (b.goalsBalance !== a.goalsBalance) {
+        return b.goalsBalance - a.goalsBalance;
+      }
+      return b.goalsFavor - a.goalsFavor;
+    });
+    return leaderboard;
   }
 
   async awayLeaderboard(): Promise<Leaderboard[]> {
