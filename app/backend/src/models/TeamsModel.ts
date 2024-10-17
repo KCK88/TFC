@@ -3,7 +3,6 @@ import SequelizeTeams from '../database/models/SequelizeTeams';
 import { ITeamsModel } from '../Interfaces/Teams/ITeamsModel';
 import Matches from '../database/models/SequelizeMatches';
 import { TeamMatches } from '../types/TeamMatches';
-// import { TeamMatches } from '../types/TeamMatches';
 
 const where = { inProgress: false };
 

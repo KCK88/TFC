@@ -33,4 +33,9 @@ export default class TeamsController {
     const dbData = await this.teamsService.awayOrdered();
     return res.status(200).json(dbData);
   }
+
+  async leaderboard(_req: Request, res: Response) {
+    const dbData = await this.teamsService.leaderboard();
+    return res.status(200).json(dbData);
+  }
 }

@@ -7,5 +7,6 @@ const router = Router();
 
 router.get('/home', (req: Request, res: Response) => teamsController.homeLeaderboard(req, res));
 router.get('/away', (req: Request, res: Response) => teamsController.awayLeaderboard(req, res));
+router.get('/', (req: Request, res: Response) => teamsController.leaderboard(req, res));
 
 export default router;

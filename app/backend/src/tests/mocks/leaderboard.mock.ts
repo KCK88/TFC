@@ -72,7 +72,7 @@ export const teamsMatchesResult = [
     "goalsFavor": 3,
     "goalsOwn": 7,
     "goalsBalance": -4,
-    "efficiency": "11.11%"
+    "efficiency": "11.11"
   },
   {
     "name": "Bahia",
@@ -84,6 +84,6 @@ export const teamsMatchesResult = [
     "goalsFavor": 0,
     "goalsOwn": 4,
     "goalsBalance": -4,
-    "efficiency": "0.00%"
+    "efficiency": "0.00"
   },
 ]

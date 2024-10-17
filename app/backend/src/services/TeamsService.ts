@@ -122,6 +122,11 @@ export default class TeamsService {
   async awayOrdered() {
     const leaderboard = await this.awayBalanceEfficiency();
 
+    TeamsService.order(leaderboard);
+    return leaderboard;
+  }
+
+  private static order(leaderboard: BalanceEfficiency[]) {
     leaderboard.sort((x, y) => {
       if (y.totalPoints !== x.totalPoints) {
         return y.totalPoints - x.totalPoints;
@@ -135,5 +140,28 @@ export default class TeamsService {
       return y.goalsFavor - x.goalsFavor;
     });
     return leaderboard;
+  }
+
+  async leaderboard() {
+    const [awayLeaderboard, homeLeaderboard] = [await this.awayOrdered(), await this.homeOrdered()];
+
+    const leaderboard = homeLeaderboard.map((home) => {
+      const ar = awayLeaderboard.find((away) => away.name === home.name);
+
+      return ar === undefined ? null : {
+        name: home.name,
+        totalPoints: ar.totalPoints + home.totalPoints,
+        totalGames: ar.totalGames + home.totalGames,
+        totalVictories: ar.totalVictories + home.totalVictories,
+        totalDraws: ar.totalDraws + home.totalDraws,
+        totalLosses: ar.totalLosses + home.totalLosses,
+        goalsOwn: ar.goalsOwn + home.goalsOwn,
+        goalsFavor: ar.goalsFavor + home.goalsFavor,
+        goalsBalance: (ar.goalsFavor + home.goalsFavor) - (ar.goalsOwn + home.goalsOwn),
+        efficiency: `${((ar.totalPoints + home.totalPoints)
+          / ((ar.totalGames + home.totalGames) * 3)) * 100}`,
+      };
+    });
+    return TeamsService.order(leaderboard as BalanceEfficiency[]);
   }
 }
