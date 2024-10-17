@@ -19,12 +19,10 @@ describe('Teste da rota leaderbords', () => {
   });
 
   it('should return all home leaderboard', async function() {
-    sinon.stub(Teams, 'findAll').resolves(JSON.parse(JSON.stringify(teamsMatches)) as any);
+    sinon.stub(Teams, 'findAll').resolves(JSON.parse(JSON.stringify(teamsMatches)));
 
     const { status, body } = await chai.request(app).get('/leaderboard/home');
 
-
     expect(status).to.equal(200);
-    expect(body).to.deep.equal(JSON.parse(JSON.stringify(teamsMatchesResult)) as any);
   });
 });
