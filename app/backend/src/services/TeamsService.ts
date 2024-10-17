@@ -158,8 +158,8 @@ export default class TeamsService {
         goalsOwn: ar.goalsOwn + home.goalsOwn,
         goalsFavor: ar.goalsFavor + home.goalsFavor,
         goalsBalance: (ar.goalsFavor + home.goalsFavor) - (ar.goalsOwn + home.goalsOwn),
-        efficiency: `${((ar.totalPoints + home.totalPoints)
-          / ((ar.totalGames + home.totalGames) * 3)) * 100}`,
+        efficiency: `${(((ar.totalPoints + home.totalPoints)
+          / ((ar.totalGames + home.totalGames) * 3)) * 100).toFixed(2)}`,
       };
     });
     return TeamsService.order(leaderboard as BalanceEfficiency[]);
